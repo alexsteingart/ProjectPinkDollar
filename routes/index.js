@@ -5,8 +5,8 @@
 DataAcessProvider = require('../dataAccessProvider-mongodb.js')
 var dataTypes = require('../util/dataTypes.js');
 var DateHelper = require('../util/dateHelper.js');
-var dataAccessProvider = new DataAccessProvider('dbh76.mongolab.com',27767);
-//var dataAccessProvider = new DataAccessProvider('localhost',27017);
+
+var dataAccessProvider = new DataAccessProvider('localhost',27017);
 
 
 exports.index = function(req,res){
