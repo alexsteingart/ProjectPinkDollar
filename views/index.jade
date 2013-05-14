@@ -1,0 +1,24 @@
+script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+script(src='https://www.google.com/jsapi')
+script(src='javascripts/res_show.js')
+
+h1= title
+p Welcome to #{title}
+#formParent
+	form(name="fileform", id="fileform", action="/uploadCSV", enctype="multipart/form-data", method="post")
+		b Upload a New File:
+		input(type="file", name="upload", multiple="multiple")
+		input(type="submit", value="Submit")
+		#alreadyUploadedLinkDiv(style="margin-top:20px;")
+			b Or Choose one that's already in the system:
+			div
+				div(style='padding-left:15px;float:left;')
+					-each collection in collections
+						-var prettyName = collection.name.substring(collection.name.indexOf('.')+1,collection.name.length)
+						-if(prettyName=='metadata' || prettyName=='system.indexes') continue;
+						a(href='#', onclick='document.getElementById("alreadyUploaded").value="#{prettyName}";document.getElementById("fileform").submit();', onmouseover='loadMetadataToHoverOver("#{prettyName}",event);', onmouseout='document.getElementById("messageDiv").style.display="none";') #{prettyName}
+		input(type='hidden', name='alreadyUploaded', id='alreadyUploaded')
+		
+		#messageDiv(style="display:none;")
+		
+		

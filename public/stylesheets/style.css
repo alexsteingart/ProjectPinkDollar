@@ -1,0 +1,110 @@
+body {
+  font-family: "Helvetica Neue", "Lucida Grande", "Arial";
+  font-size: 13px;
+  text-stroke: 1px rgba(255,255,255,0.1);
+  color: #555;
+  height: 450px;
+}
+h1,
+h2 {
+  margin: 0;
+  text-align: center;
+  font-size: 22px;
+  color: #343434;
+}
+h1 {
+  text-shadow: 1px 2px 2px #ddd;
+  font-size: 60px;
+}
+li {
+  list-style: none;
+}
+.calendarParent {
+  height: 100%;
+  width: 100%;
+}
+.calendarBox {
+  float: left;
+  width: 13%;
+  height: 100%;
+  color: #000;
+  margin: 5px;
+}
+.calendarDate {
+  text-align: right;
+  padding-right: 5px;
+  border-right: 1px solid #000;
+  font-size: 20px;
+  font-weight: bold;
+}
+#calendarDateContent {
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #000;
+  color: #000;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 100;
+}
+.height75Percent {
+  height: 75%;
+}
+.greyBackground {
+  background-color: #eee;
+  z-index: 200 !important;
+}
+.calendarEvent {
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin: 2px;
+  padding: 2px;
+}
+.monthHeader {
+  text-align: center;
+  font-size: 50px;
+  color: #000;
+}
+.logo {
+  color: #000;
+  background-image: url("/images/logo.jpg");
+  width: 35%;
+  height: 50px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.weekDiv {
+  clear: both;
+  height: 20%;
+}
+.eventDetails {
+  position: absolute;
+  z-index: 300;
+  margin-top: 5px;
+  margin-left: 10px;
+  border: 1px solid #ddd;
+  padding: 2px 3px 4px;
+  background-color: #000;
+  color: #eee;
+}
+#functionalOverlayParent {
+  position: absolute;
+  z-index: 1000;
+  margin: auto;
+  text-align: center;
+  border: 1px solid #808080;
+  padding: 5px;
+  top: 155px;
+  left: 300px;
+  background: #fff;
+}
+.fieldLabel {
+  text-align: right;
+  width: 100px;
+  float: left;
+}
+.fieldValue {
+  text-align: left;
+  width: 200px;
+  float: left;
+}

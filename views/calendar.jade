@@ -1,0 +1,39 @@
+extends layout
+block head
+	script(src='/javascripts/calendar.js')
+block body
+	div.logo
+	-var monthInfo=calendarFormats[today.getMonth()];
+	div.monthHeader
+		| <a href='/calendar/#{(today.getMonth()==0?(today.getFullYear()-1)+'-'+(12):today.getFullYear()+'-'+(today.getMonth()<10?'0':'')+(today.getMonth())) + '-02 00:00:00 GMT-400'}' ><img src='/images/left.gif'></a> #{monthInfo.name} <a href='/calendar/#{(today.getMonth()==11?(today.getFullYear()+1)+'-'+('01'):today.getFullYear()+'-'+(today.getMonth()+2<10?'0':'')+(today.getMonth()+2)) + '-02 00:00:00 GMT-400'}' ><img src='/images/right.gif'></a>
+	div.calendarParent
+		-var firstDayOfMonth = today, dayCount=1, first=true;
+		-firstDayOfMonth.setDate(1);
+		- while(dayCount<=monthInfo.noDays(today.getFullYear()))
+			div.weekDiv
+				- var i=0;
+				- if(first)
+					-first = false;
+					- for (; i<firstDayOfMonth.getDay(); i++)
+						div.calendarBox &nbsp;
+				- for (; i<7 && dayCount<=monthInfo.noDays(today.getFullYear()); i++, dayCount++)
+					div.calendarBox
+						div.calendarDate 
+							img(src='/images/add.png', style='width:10px;height:10px;position:relative;left:10px;float:left;top:5px;cursor:pointer;', onclick='getNewObject("event",{eventDate: "#{today.getFullYear()}-#{today.getMonth()+1<10?'0':''}#{today.getMonth()+1}-#{dayCount<10?'0':''}#{dayCount}"});return false;', alt='Add New Event')
+							| #{dayCount}
+						div#calendarDateContent.height75Percent(onmouseover='if(this.clientHeight<this.scrollHeight){this.className="greyBackground";}', onmouseout='this.className="height75Percent";')
+							-if(events[dayCount])
+								-for (var k=0; k<events[dayCount].length; k++)
+									- var title = events[dayCount][k].name?events[dayCount][k].name:events[dayCount][k].title
+									div.calendarEvent(onmouseover='displayElementToRightOfTrigger("#{k}#{title}",event);this.style.backgroundColor="#AAAAAA"', onmouseout="hideElement('#{k}#{title}');this.style.backgroundColor=''") #{title}
+							-else 
+								| &nbsp;
+		-for(var dayCount in events)
+			-for(var k=0; k<events[dayCount].length; k++)
+				- var title = events[dayCount][k].name?events[dayCount][k].name:events[dayCount][k].title
+				div.eventDetails(id='#{k}#{title}', style='display:none;', onClick='getDBObject("#{events[dayCount][k]['_id']}","edit","event");return false;', onmouseover='this.isHovered=true', onmouseout='hideElement(this.id)')
+					-for(var prop in events[dayCount][k])
+						-if(prop!='_id')
+							div.calendarEventDetailItem 
+								span.fieldLabel #{prop}: 
+								span.fieldValue #{events[dayCount][k][prop]}

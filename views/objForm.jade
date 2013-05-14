@@ -1,0 +1,19 @@
+include util/outputFuncs
+
+form#objForm(action='/doEditObject', method='post', id='objectEditForm', name'objectEditForm')
+	-for(var field in obj)
+		-var display = '||_id||type||'.indexOf(field)>-1?'none':'block';
+		div(id='#{field}#{obj["_id"]}Div', style='display:#{display};')
+			span.fieldLabel
+				mixin prettyPrint(field)
+			span.fieldValue
+				-if(objAction=='edit')
+					-if(objDistincts[field])
+						mixin checkboxPrint(field,obj["_id"],objDistincts[field],obj[field])
+					-else
+						input(id='#{field}#{obj["_id"]}', name='#{field}', value='#{obj[field]}')
+				-else
+					|#{obj[field]
+	-if(objAction=='edit')
+		input(type='button', value='Submit', onclick='submitForm("objectEditForm", "functionalOverlay")')
+

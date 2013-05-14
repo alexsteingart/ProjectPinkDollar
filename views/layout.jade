@@ -1,0 +1,13 @@
+!!! 5
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		script(src='/javascripts/jquery.js')
+		block head
+	body
+		block body
+		div#functionalOverlayParent(style='display:none;')
+			div(onclick='this.parentElement.style.display="none";', style='text-align:right;pointer:hand;')
+				|[X]
+			div#functionalOverlay

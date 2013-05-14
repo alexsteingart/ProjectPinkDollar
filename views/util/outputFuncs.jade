@@ -1,0 +1,15 @@
+mixin prettyPrint(str)
+	- ret = ""
+	- while(( ind = str.search(/[A-Z]/))>-1)
+		-ret+=str.substring(0,1).toUpperCase() + (ind>1?str.substring(1,ind):'') + ' '
+		-str=str.substring(ind, ind+1).toLowerCase() + (ind==str.length-1?'':str.substring(ind+1))
+	- ret+=str.substring(0,1).toUpperCase() + (str.length>1?str.substring(1):'')
+	| #{ret}
+	
+mixin checkboxPrint(name, id, options, selectedValues)
+	- selecteds = {}
+	- each selected in selectedValues
+		- selecteds[selected] = true
+	- each option in options
+		| <input type='checkbox' name='#{name}' id='#{name}#{id}' value='#{option}' #{selecteds[option]?'checked':''} >
+		| #{option}
